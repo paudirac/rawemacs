@@ -12,6 +12,19 @@
   (package-refresh-contents)
   (package-install 'spacemacs-theme))
 
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode))
+
+(use-package beacon
+  :ensure t
+  :init
+  (beacon-mode 1))
+
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (defvar my-term-shell "/bin/bash")
@@ -21,10 +34,13 @@
 
 (global-set-key (kbd "<s-return>") 'ansi-term)
 
-(use-package which-key
-  :ensure t
-  :init
-  (which-key-mode))
+(setq scroll-conservatively 100)
+(setq ring-bell-function 'ignore)
+(when window-system
+  (global-hl-line-mode t))
+(when window-system
+  (global-prettify-symbols-mode t))
+
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -43,7 +59,7 @@
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(package-selected-packages (quote (use-package))))
+ '(package-selected-packages (quote (beacon use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
