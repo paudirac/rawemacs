@@ -12,32 +12,8 @@
   (package-refresh-contents)
   (package-install 'spacemacs-theme))
 
-
-(use-package beacon
-  :ensure t
-  :init
-  (beacon-mode 1))
-
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
-
-(setq scroll-conservatively 100)
-(setq ring-bell-function 'ignore)
-(when window-system
-  (global-hl-line-mode t))
-(when window-system
-  (global-prettify-symbols-mode t))
-
-
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-
-(setq inhibit-startup-message t)
+(org-babel-load-file
+ (expand-file-name "~/.emacs.d/config.org"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

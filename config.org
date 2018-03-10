@@ -1,6 +1,44 @@
 * Introduction
   This is work in progress, based on [Emacs Tutorial](https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n)s.
 
+* Emacs reset
+
+  Get rid of the default decorations that I am not going to use and
+  try to get the maximum space for working.
+** Disable toolbar
+  #+BEGIN_SRC emacs-lisp
+    (tool-bar-mode -1)
+  #+END_SRC
+
+** Disable menubar
+  #+BEGIN_SRC emacs-lisp
+    (menu-bar-mode -1)
+  #+END_SRC
+
+** Disable scroll bar
+  #+BEGIN_SRC emacs-lisp
+    (scroll-bar-mode -1)
+  #+END_SRC
+
+** Disable startup screen
+  #+BEGIN_SRC emacs-lisp
+    (setq inhibit-startup-message t)
+  #+END_SRC
+
+** Backups and autosaves
+
+   Provided that important work is already under source control,
+   I don't need Emacs to autosave or to create copies.
+   #+BEGIN_SRC emacs-lisp
+     (setq make-backup-files nil)
+     (setq auto-save-default nil)
+   #+END_SRC
+
+** Prompt only y/n
+   #+BEGIN_SRC emacs-lisp
+     (defalias 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+
 * Introspection and discoverability
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
@@ -19,3 +57,41 @@
 
   (global-set-key (kbd "<s-return>") 'ansi-term)
 #+END_SRC
+
+* Visual enhancements
+
+** Where I am on the file?
+   
+   In order to know where I am on a file when switching buffers,
+   use beacon as a visual clue.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package beacon
+       :ensure t
+       :init
+       (beacon-mode 1))
+   #+END_SRC
+
+** Scroll pages smothly
+   #+BEGIN_SRC emacs-lisp
+     (setq scroll-conservatively 100)
+   #+END_SRC
+
+** Get rid off the system bell
+   #+BEGIN_SRC emacs-lisp
+     (setq ring-bell-function 'ignore)
+   #+END_SRC
+
+** When on not in the terminal
+
+*** Show current line
+    #+BEGIN_SRC emacs-lisp
+      (when window-system
+        (global-hl-line-mode t))
+    #+END_SRC
+
+*** Pretty lambda
+    #+BEGIN_SRC emacs-lisp
+      (when window-system
+        (global-prettify-symbols-mode t))
+    #+END_SRC
