@@ -39,6 +39,17 @@
      (defalias 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
 
+** Match parens
+   #+BEGIN_SRC emacs-lisp
+     (show-paren-mode 1)
+   #+END_SRC
+
+** Encoding utf-8 by default
+   #+BEGIN_SRC emacs-lisp
+     (setq coding-system-for-read 'utf-8
+           coding-system-for-write 'utf-8)
+   #+END_SRC
+
 * Introspection and discoverability
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
@@ -95,3 +106,31 @@
       (when window-system
         (global-prettify-symbols-mode t))
     #+END_SRC
+** Font size
+   #+BEGIN_SRC emacs-lisp
+     (define-key global-map (kbd "C-+") 'text-scale-increase)
+     (define-key global-map (kbd "C--") 'text-scale-decrease)
+   #+END_SRC
+* Window manager
+  #+BEGIN_SRC emacs-lisp
+    (use-package exwm
+      :ensure t
+      :config
+      (require 'exwm-config)
+      (exwm-config-default))
+  #+END_SRC
+* Ido
+  #+BEGIN_SRC emacs-lisp
+    (setq ido-enable-flex-matching nil)
+    (setq ido-create-new-buffer 'always)
+    (setq ido-everywhere t)
+    (ido-mode 1)
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package ido-vertical-mode
+      :ensure t
+      :init
+      (ido-vertical-mode 1))
+    (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+  #+END_SRC
