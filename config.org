@@ -49,6 +49,10 @@
      (setq coding-system-for-read 'utf-8
            coding-system-for-write 'utf-8)
    #+END_SRC
+** Replace buffer with ibuffer
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-x b") 'ibuffer)
+  #+END_SRC
 
 * Introspection and discoverability
 #+BEGIN_SRC emacs-lisp
@@ -134,3 +138,4 @@
       (ido-vertical-mode 1))
     (setq ido-vertical-define-keys 'C-n-and-C-p-only)
   #+END_SRC
+
