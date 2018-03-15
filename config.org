@@ -1,6 +1,6 @@
 * Introduction
   This is work in progress, based on [[https://www.youtube.com/watch?v%3Dd6iY_1aMzeg&list%3DPLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][Emacs Tutorial]] and [[https://github.com/daedreth/UncleDavesEmacs][UncleDaves' emacs config]].
-
+  
 * Emacs reset
 
   Get rid of the default decorations that I am not going to use and
@@ -51,9 +51,10 @@
    #+END_SRC
 ** Replace buffer with ibuffer
   #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "C-x b") 'ibuffer)
+    (global-set-key (kbd "C-x C-b") 'ibuffer)
+    (global-set-key (kbd "C-x b") 'ido-switch-buffer)
   #+END_SRC
-
+   
 * Introspection and discoverability
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
@@ -110,32 +111,78 @@
       (when window-system
         (global-prettify-symbols-mode t))
     #+END_SRC
+
 ** Font size
    #+BEGIN_SRC emacs-lisp
      (define-key global-map (kbd "C-+") 'text-scale-increase)
      (define-key global-map (kbd "C--") 'text-scale-decrease)
    #+END_SRC
+
 * Window manager
+ #+BEGIN_SRC emacs-lisp
+   (use-package exwm
+     :ensure t
+     :config
+     (require 'exwm-config)
+     (exwm-config-default))
+ #+END_SRC
+
+* Ido
+ #+BEGIN_SRC emacs-lisp
+   (setq ido-enable-flex-matching nil)
+   (setq ido-create-new-buffer 'always)
+   (setq ido-everywhere t)
+   (ido-mode 1)
+   (exwm-config-ido)
+ #+END_SRC
+
+ #+BEGIN_SRC emacs-lisp
+   (use-package ido-vertical-mode
+     :ensure t
+     :init
+     (ido-vertical-mode 1))
+   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+ #+END_SRC
+
+* Mode line
+
+  Use the spacemacs modeline
   #+BEGIN_SRC emacs-lisp
-    (use-package exwm
+    (use-package spaceline
       :ensure t
       :config
-      (require 'exwm-config)
-      (exwm-config-default))
-  #+END_SRC
-* Ido
-  #+BEGIN_SRC emacs-lisp
-    (setq ido-enable-flex-matching nil)
-    (setq ido-create-new-buffer 'always)
-    (setq ido-everywhere t)
-    (ido-mode 1)
+      (require 'spaceline-config)
+        (setq spaceline-buffer-encoding-abbrev-p nil)
+        (setq spaceline-line-column-p nil)
+        (setq spaceline-line-p nil)
+        (setq powerline-default-separator (quote arrow))
+        (setq line-number-mode 1)
+        (setq col-number-mode 1)
+        (spaceline-spacemacs-theme)
+        (setq display-time-24hr-format t)
+        (setq display-time-format "%H:%M - %d-%m-%Y")
+        (display-time-mode 1))
   #+END_SRC
 
+* Config
+  To reload the configuration
   #+BEGIN_SRC emacs-lisp
-    (use-package ido-vertical-mode
+    (defun config-reload ()
+      "Reloads ~/.emacs.d/config.org at runtime"
+      (interactive)
+      (org-babel-load-file (expand-file-name "~/.emacs.d/config.org")))
+    (global-set-key (kbd "C-c r") 'config-reload)
+  #+END_SRC
+
+* Ivy
+  #+BEGIN_SRC emacs-lisp
+    (use-package ivy
+      :ensure t)
+  #+END_SRC
+
+* Searching
+  #+BEGIN_SRC emacs-lisp
+    (use-package swiper
       :ensure t
-      :init
-      (ido-vertical-mode 1))
-    (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+      :bind ("C-s" . 'swiper))
   #+END_SRC
-
