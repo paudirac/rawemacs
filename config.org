@@ -186,3 +186,28 @@
       :ensure t
       :bind ("C-s" . 'swiper))
   #+END_SRC
+
+* Projects
+  #+BEGIN_SRC emacs-lisp
+    (use-package projectile
+      :ensure t
+      :config
+      (projectile-mode))
+  #+END_SRC
+
+* Evil
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil
+      :ensure t
+      :config
+      (evil-mode 1))
+  #+END_SRC
+
+* Specific modes
+
+** R
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package ess
+       :ensure t)
+   #+END_SRC

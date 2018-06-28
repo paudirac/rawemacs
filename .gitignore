@@ -1,2 +1,4 @@
 elpa
 config.el
+projectile*.eld
+session*
