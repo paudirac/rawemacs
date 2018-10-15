@@ -112,6 +112,14 @@
         (global-prettify-symbols-mode t))
     #+END_SRC
 
+** Line numbers
+
+    #+BEGIN_SRC emacs-lisp
+      (which-key-add-key-based-replacements
+        "C-c t" "toggles")
+      (define-key global-map (kbd "C-c t n") 'linum-mode)
+    #+END_SRC
+
 ** Font size
    #+BEGIN_SRC emacs-lisp
      (define-key global-map (kbd "C-+") 'text-scale-increase)
