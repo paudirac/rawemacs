@@ -203,8 +203,10 @@
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
       :ensure t
+      :bind-keymap ("C-c p" . projectile-command-map)
       :config
       (projectile-mode))
+      
   #+END_SRC
 
   Add a tree for the projects

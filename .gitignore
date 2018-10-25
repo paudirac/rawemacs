@@ -2,3 +2,5 @@ elpa
 config.el
 projectile*.eld
 session*
+ido.last
+.cache/
