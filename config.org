@@ -17,7 +17,8 @@
 
 ** Disable scroll bar
   #+BEGIN_SRC emacs-lisp
-    (scroll-bar-mode -1)
+   (when window-system
+    (scroll-bar-mode -1))
   #+END_SRC
 
 ** Disable startup screen
@@ -128,11 +129,12 @@
 
 * Window manager
  #+BEGIN_SRC emacs-lisp
+   (when window-system
    (use-package exwm
      :ensure t
      :config
      (require 'exwm-config)
-     (exwm-config-default))
+     (exwm-config-default)))
  #+END_SRC
 
 * Ido
@@ -141,7 +143,8 @@
    (setq ido-create-new-buffer 'always)
    (setq ido-everywhere t)
    (ido-mode 1)
-   (exwm-config-ido)
+   (when window-system
+     (exwm-config-ido))
  #+END_SRC
 
  #+BEGIN_SRC emacs-lisp
@@ -309,4 +312,12 @@
        :config
        (setq imenu-list-focus-after-activation t
              imenu-list-auto-resize nil)) 
+  #+END_SRC
+
+* Org
+
+  Set default refile directory
+  #+BEGIN_SRC emacs-lisp
+    (setq org-default-notes-file (concat org-directory "/notes.org"))
+    (global-set-key (kbd "C-c o c") 'org-capture)
   #+END_SRC
