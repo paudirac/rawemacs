@@ -245,11 +245,14 @@
   #+END_SRC
 
 * Evil
+  Set evil mode from start and unshadow `TAB` for cycling when in org mode.
   #+BEGIN_SRC emacs-lisp
     (use-package evil
       :ensure t
       :config
-      (evil-mode 1))
+      (evil-mode 1)
+      (evil-define-key 'normal org-mode-map
+        (kbd "TAB") 'org-cycle))
   #+END_SRC
 
 * Specific modes
@@ -320,6 +323,9 @@
 
   Set default refile directory
   #+BEGIN_SRC emacs-lisp
-    (setq org-default-notes-file (concat org-directory "/notes.org"))
-    (global-set-key (kbd "C-c o c") 'org-capture)
+    (use-package org
+      :ensure t
+      :config
+      (setq org-default-notes-file (concat org-directory "/notes.org"))
+      (global-set-key (kbd "C-c o c") 'org-capture))
   #+END_SRC
