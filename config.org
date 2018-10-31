@@ -308,6 +308,12 @@
        :init (setq markdown-command "multimarkdown"))
    #+END_SRC
 
+** Makefile
+
+   Use =makefile-mode= when files start with =Makefile=, like in =Makefile.devel=,
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'auto-mode-alist '("Makefile\\.*" . makefile-mode))
+   #+END_SRC
 * Menu
 
   #+BEGIN_SRC emacs-lisp
