@@ -17,8 +17,7 @@
 
 ** Disable scroll bar
   #+BEGIN_SRC emacs-lisp
-   (when window-system
-    (scroll-bar-mode -1))
+    (scroll-bar-mode -1)
   #+END_SRC
 
 ** Disable startup screen
@@ -185,6 +184,15 @@
     (global-set-key (kbd "C-c r") 'config-reload)
   #+END_SRC
 
+  Edit the config
+  #+BEGIN_SRC emacs-lisp
+    (defun config-load-config-file ()
+      "Loads the config file"
+      (interactive)
+      (find-file "~/.rawemacs.d/config.org"))
+    (global-set-key (kbd "C-c l c") 'config-load-config-file)
+  #+END_SRC
+
 * Ivy
   #+BEGIN_SRC emacs-lisp
     (use-package ivy
@@ -314,6 +322,23 @@
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-mode-alist '("Makefile\\.*" . makefile-mode))
    #+END_SRC
+
+** YAML
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode
+       :ensure t
+       :config
+       (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+   #+END_SRC
+
+** Elixir
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package elixir-mode
+      :ensure t)
+   #+END_SRC
+
 * Menu
 
   #+BEGIN_SRC emacs-lisp
@@ -337,5 +362,13 @@
       (setq org-agenda-files `(,org-directory))
       (global-set-key (kbd "C-c o c") 'org-capture)
       (global-set-key (kbd "C-c o a") 'org-agenda))
+  #+END_SRC
+
+  Archive entries that are already ~DONE~.
+
+  #+BEGIN_SRC emacs-lisp
+    (defun paudirac-org-archive-done-taks ()
+      (interactive)
+      (org-map-entries 'org-archive-subtree "/DONE" 'file))
   #+END_SRC
   
