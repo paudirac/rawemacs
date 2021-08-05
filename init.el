@@ -28,13 +28,11 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(custom-enabled-themes (quote (spacemacs-dark)))
+ '(custom-enabled-themes '(spacemacs-dark))
  '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   (quote
-    (neotree imenu-list markdown-mode paredit paredit-mode fsharp-mode haskell-mode ess evil projectile swiper ivy spaceline ido-vertical-mode exwm beacon use-package))))
+   '(neotree imenu-list markdown-mode paredit paredit-mode fsharp-mode haskell-mode ess evil projectile swiper ivy spaceline ido-vertical-mode exwm beacon use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

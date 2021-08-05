@@ -127,24 +127,6 @@
    #+END_SRC
 
 * Window manager
- #+BEGIN_SRC emacs-lisp
-   (when window-system
-   (use-package exwm
-     :ensure t
-     :config
-     (require 'exwm-config)
-     (exwm-config-default)))
- #+END_SRC
-
-* Ido
- #+BEGIN_SRC emacs-lisp
-   (setq ido-enable-flex-matching nil)
-   (setq ido-create-new-buffer 'always)
-   (setq ido-everywhere t)
-   (ido-mode 1)
-   (when window-system
-     (exwm-config-ido))
- #+END_SRC
 
  #+BEGIN_SRC emacs-lisp
    (use-package ido-vertical-mode
@@ -372,3 +354,41 @@
       (org-map-entries 'org-archive-subtree "/DONE" 'file))
   #+END_SRC
   
+* nano
+
+  #+BEGIN_SRC emacs-lisp
+    (add-to-list 'load-path "/home/pcervera/emacs/nano-emacs/")
+
+    (require 'nano-theme)
+    (nano-faces)
+    (nano-theme)
+    (require 'nano-defaults)
+    ;; Nano session saving (optional)
+    ;(require 'nano-session)
+    ;; Nano header & mode lines (optional)
+    (require 'nano-modeline)
+
+    ;; Nano key bindings modification (optional)
+    ;(require 'nano-bindings)
+
+    ;; Compact layout (need to be loaded after nano-modeline)
+    (when (member "-compact" command-line-args)
+      (require 'nano-compact))
+
+    ;; Nano counsel configuration (optional)
+    ;; Needs "counsel" package to be installed (M-x: package-install)
+    ;; (require 'nano-counsel)
+
+    ;; Welcome message (optional)
+    (let ((inhibit-message t))
+      (message "Welcome to GNU Emacs / N Λ N O edition")
+      (message (format "Initialization time: %s" (emacs-init-time))))
+
+    ;; Splash (optional)
+    (unless (member "-no-splash" command-line-args)
+      (require 'nano-splash))
+
+    ;; Help (optional)
+    (unless (member "-no-help" command-line-args)
+      (require 'nano-help))
+  #+END_SRC
